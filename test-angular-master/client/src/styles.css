@@ -1,0 +1,7 @@
+
+body{
+  background-color: dodgerblue;
+}
+@import '~ngx-toastr/toastr';
+@import "../node_modules/igniteui-angular/styles/igniteui-angular.css";
+

@@ -1,0 +1,82 @@
+
+/* Styles pour le container du formulaire */
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20%;
+}
+
+.register-body{
+ display: flex;
+ flex-direction: column;
+}
+
+/* Styles pour le titre du formulaire */
+.register-container h2 {
+  text-align: center;
+  margin: 0 0 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.register-form{
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 40vw;
+}
+/* Styles pour les groupes de formulaire */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Styles pour les labels */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Styles pour les champs de saisie */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Pour s'assurer que padding et bordure sont inclus dans la largeur */
+}
+
+/* Styles pour le bouton de soumission */
+.btn-success {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Changement de couleur du bouton lors du survol */
+.btn-success:hover {
+  background: linear-gradient(90deg, #8fd3f4 0%, #84fab0 100%);
+}
+
+/* Styles pour le texte de redirection */
+.register-container .register-body p {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
+.register-container .register-body p a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.text-register {
+  cursor: pointer;
+}

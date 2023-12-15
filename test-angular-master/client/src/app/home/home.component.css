@@ -1,0 +1,141 @@
+.navbar {
+    background-color: #333;
+    padding: 10px;
+    color: #fff;
+  }
+  
+  .navbar-brand a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;
+  }
+  
+  .navbar-nav {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav-item {
+    margin-right: 15px;
+  }
+  
+  .nav-item a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .home-image{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  .navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .home-container-body{
+    background-color: #333;
+    display: flex;
+    height: 100%;
+  }
+
+  .home-container-body-gauche{
+    background-color: red;
+    display: flex;
+    flex: 1;
+  }
+
+  .home-container-body-droite{
+   background-color: blue;
+    display: flex;
+    flex: 4;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+
+  .home-container-body-droite {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    color: #555;
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+
+  .like-button {
+    cursor: pointer;
+    color: #3498db;
+  }
+
+  .like-count {
+    margin-left: 5px;
+  }
+
+  .comment-section {
+    margin-top: 20px;
+  }
+
+  .comments {
+    list-style: none;
+    padding: 0;
+  }
+
+  .comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .comment-text {
+    margin-left: 10px;
+  }
+
+  .comment-form {
+    margin-top: 10px;
+  }

@@ -1,3 +1,8 @@
+
+Biraveen SIVAHARAN
+alex CORCEIRO 
+Omma HABIBA BIPLOB 
+
 # Clone de Twitter avec Angular et Node.js/Express
 
 ## Description du Projet
@@ -11,7 +16,7 @@ Ce projet est un clone simplifié de Twitter, développé avec Angular pour le f
 ## Technologies Utilisées
 - **Frontend :** Angular
 - **Backend :** Node.js avec Express
-- **Base de Données :** [Votre choix de base de données]
+- **Base de Données :** MongoDB
 
 ## Installation
 

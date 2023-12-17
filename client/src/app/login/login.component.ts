@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authificate.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 interface ApiResponse {
   success: boolean;
@@ -18,31 +20,35 @@ export class LoginComponent {
   username: string = "";
   password: string = "";
   errorMessage: string = "";
+  loginForm: FormGroup;
+form: any;
 
-  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {}
+  constructor(private formBuilder: FormBuilder,private AuthenticationService: AuthenticationService, private router: Router, private toastr: ToastrService,) {
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
   async login() {
     this.errorMessage = '';
     try {
       const loginData = {
-        email: this.username, // Assurez-vous d'utiliser 'email' si c'est ce que l'API attend
+        email: this.username,
         password: this.password
       };
 
-      console.log("Data: " + JSON.stringify(loginData));
-
-      const response = await this.http.post<ApiResponse>('http://localhost:4000/api/users', loginData, { withCredentials: true }).toPromise();
-      console.log(response)
-      if (response ) {
+      const response = await this.AuthenticationService.login(loginData);
+      console.log(response);
+      if (response) {
         this.toastr.success('Connexion réussie!');
         this.router.navigate(['/profile']);
       }
     } catch (error: any) {
-      // Utilisez le message d'erreur renvoyé par l'API
-      this.toastr.error(error.error?.message || 'Erreur lors de la connexion au serveur');
+      this.errorMessage = error.error?.message || 'Erreur lors de la connexion au serveur';
+      this.toastr.error(this.errorMessage);
     }
   }
-
 
   goToRegister(): void {
     this.router.navigate(['/register']);

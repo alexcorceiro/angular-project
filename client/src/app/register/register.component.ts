@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthenticationService } from '../authificate.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,33 +19,29 @@ export class RegisterComponent {
   errorMessage: string = '';
 
   constructor(
-    private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore,
+    private AuthenticationService: AuthenticationService, private toastr: ToastrService,
     private router: Router
   ) {}
 
-  async register() {
-    if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Les mots de passe ne correspondent pas.';
-      return;
-    }
+  register() {
+    const user = {
+      prenom: this.prenom,
+      nom: this.nom,
+      dateNaissance: this.dateNaissance,
+      email: this.email,
+      password: this.password,
+      confirmPassword: this.confirmPassword
+    };
 
-    try {
-      const result = await this.afAuth.createUserWithEmailAndPassword(this.email, this.password);
-      // Here, the user is created and you can now save additional information to Firestore
-      await this.firestore.collection('users').doc(result.user?.uid).set({
-        prenom: this.prenom,
-        nom: this.nom,
-        email: this.email,
-        dateNaissance : this.dateNaissance
-      });
-
-      console.log(result);
-      // Navigate to a different page if needed
-      this.router.navigate(['/profile']);
-    } catch (error: any) {
-      this.errorMessage = error.message;
-    }
+    this.AuthenticationService.register(user).subscribe({
+      next: (response) => {
+        this.toastr.success('Inscription réussie');
+        this.router.navigate(['/home']);      },
+      error: (error) => {
+        this.errorMessage = error.message;
+        this.toastr.error('Erreur lors de l’inscription');
+      }
+    });
   }
 
   goToLogin() {

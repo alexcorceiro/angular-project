@@ -32,7 +32,20 @@
   align-items: center;
 }
 
-.nav-title{
+.nav-title {
   margin-left: 15px;
   font-size: x-large;
+}
+
+.nav-title-container{
+  text-decoration: none;
+  color: rgb(9, 9, 9);
+ display: flex;
+ align-items: center;
+}
+
+.post-card-btn-option{
+  border: none;
+  background-color: transparent;
+  color: gray;
 }

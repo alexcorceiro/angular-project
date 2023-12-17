@@ -1,0 +1,51 @@
+<div>
+  <app-navbar/>
+<div class="profile-container">
+  <div class="profile-body">
+    <div class="profile-left">
+       <app-siderbar/>
+    </div >
+    <div class="profile-right">
+    <div class="profile-header">
+      <!-- Image de profil et bouton Éditer -->
+      <div class="profile-image-container">
+        <img *ngIf="user.image" [src]="user.image" alt="Profil de l'utilisateur" class="profile-image">
+        <button class="profile-btn-edit" (click)="toggleEdit()">
+          <span class="material-symbols-outlined">
+            edit
+            </span>
+          Modifier profil</button>
+      </div>
+    </div>
+
+    <!-- Informations de profil -->
+    <div class="profile-info">
+      <div class="profile-text-pseudo"><h4>{{ user.prenom }}</h4> </div>
+       <ul class="profile-text-fo">
+       <li class="profile-text-fo-item">0 abonnée</li>
+       <li class="profile-text-fo-item"> 0 abonement</li>
+       </ul>
+    </div>
+
+    <div class="profile-container-grid">
+      <div class="posts-grid">
+        <!-- Bouclez sur chaque post et créez une carte pour chaque post -->
+        <div class="post-card" *ngFor="let post of user.posts">
+          <div class="post-title">{{ post.title }}</div>
+          <!-- Affichez l'image du post si elle existe -->
+          <img *ngIf="post.image" [src]="post.image" alt="Image du post" class="post-image">
+          <!-- Informations supplémentaires du post -->
+          <div class="post-details">
+            <span>Créé le: {{ post.createdAt | date }}</span>
+            <span>Likes: {{ post.countlike }}</span>
+            <!-- Autres détails -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+</div>
+  </div>
+</div>
+

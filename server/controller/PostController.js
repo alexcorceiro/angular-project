@@ -3,35 +3,30 @@ const User = require("../models/Users")
 const uploadImageToFirebase = require("../utils/imageFile");
 
 exports.createPost = async (req, res) => {
-  try{
-     const { title, description} = req.body;
-     let imageUrl = null;
+    try {
+        const { title, description } = req.body;
+        let imageUrl = null;
 
-     const post = new Post({ 
-        title, 
-        description, 
-        image: imageUrl, 
-        auteur: req.user.id, 
-     })
+        const post = new Post({ 
+            title, 
+            description, 
+            image: imageUrl, 
+            auteur: req.user.id, 
+        });
 
-     if(req.file){
-        
-        imageUrl = await uploadImageToFirebase(req.file, req.user.id, "post", post._id)
-     }
+        if (req.file) {
+            imageUrl = await uploadImageToFirebase(req.file, req.user.id, "post", post._id);
+            post.image = imageUrl;
+        }
 
-   
+        await post.save();
+        await User.findByIdAndUpdate(req.user.id, { $push: { posts: post._id } });
+        res.status(200).json({ message: "Success", post });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
 
-     await post.save()
-
-     await User.findByIdAndUpdate(req.user.id, { $push: { posts: post._id } });
-
-
-     res.status(200).json({ message: "Success", post})
-
-  }catch(err){
-    res.status(400).json({message: err.message});
-  }
-}
 
 exports.getAllPost = async (req, res) => {
     try {

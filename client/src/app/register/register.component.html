@@ -1,0 +1,38 @@
+<div class="register-container">
+  <div class="register-body">
+    <form class="register-form" (ngSubmit)="register()">
+      <h2>Inscription</h2>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+      <div class="form-group">
+        <label for="firstName">Prénom:</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="prenom" name="prenom" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Nom:</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="nom" name="nom" required>
+      </div>
+      <div class="form-group">
+        <label for="birthdate">Date de naissance:</label>
+        <input type="date" class="form-control" id="birthdate" [(ngModel)]="dateNaissance" name="dateNaissance" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe:</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmez le mot de passe:</label>
+        <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+      </div>
+      <button type="submit" class="btn btn-success">S'inscrire</button>
+      <div>
+        <span class="text-register" (click)="goToLogin()">Vous avez un compte ? Se connecter.</span>
+      </div>
+    </form>
+  </div>
+</div>

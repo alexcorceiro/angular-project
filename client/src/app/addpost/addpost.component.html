@@ -1,0 +1,17 @@
+<div class="addpost">
+<app-navbar></app-navbar>
+ <div class="addpost-container">
+  <div class="addpost-left" >
+    <app-siderbar></app-siderbar>
+  </div>
+  <div class="addpost-right">
+    <div class="add-post-container">
+      <h2>Ajouter un post</h2>
+      <input class="addpost-input-title" type="text" [(ngModel)]="title" placeholder="Titre" />
+      <textarea class="addpost-input-description" [(ngModel)]="description" placeholder="Description"></textarea>
+      <input class="addpost-input-file" type="file" (change)="onFileSelected($event)" />
+      <button class="addpost-btn" (click)="createPost()">Créer le post</button>
+    </div>
+  </div>
+ </div>
+</div>

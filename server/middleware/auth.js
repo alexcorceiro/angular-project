@@ -7,10 +7,11 @@ const generateToken  = (id)=> {
 }
 
 const authenticate = (req, res, next) => {
-       const token = req.header('Authorization').replace('Bearer ', '');
+       //const token = req.header('Authorization').replace('Bearer ', '');
+       
+    const token = req.cookies["token"]
      if (!token) return res.status(401).send({message: 'Access Denied'});
    
-    //const token = req.cookies["token"]
     try{
         const verifed = jwt.verify(token, "token")
         req.user = verifed

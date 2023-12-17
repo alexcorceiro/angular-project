@@ -42,51 +42,48 @@ exports.getAllComments = async (req, res) => {
 }
 
 exports.getCommentById = async (req, res) => {
-    try{
-        const comment = await Comment.find(req.params.id).populate("user").populate("post")
-        if(!comment){
+    try {
+        // Utilisez findById au lieu de find
+        const comment = await Comment.findById(req.params.id).populate("user").populate("post");
+        if (!comment) {
             return res.status(404).send({message: "Comment not found"});
         }
         res.json(comment);
-    }catch(err){
+    } catch (err) {
         res.status(500).send({message: err.message});
     }
-}
+};
+
 
 exports.updateComment = async (req, res) => {
-    try{
+    try {
+        const commentId = req.params.id;
         const { start, description } = req.body;
-        const comment = await Comment.findById(req.params.id)
 
-        if(!comment){
-            return res.status(407).json({ message: 'Comment not found'})
+        // Trouver le commentaire par ID et le mettre à jour
+        const updatedComment = await Comment.findByIdAndUpdate(
+            commentId, 
+            { start, description },
+            { new: true } // Cette option renvoie le document mis à jour
+        );
+
+        if (!updatedComment) {
+            return res.status(404).json({ message: "Comment not found" });
         }
 
-        if(comment.user.toString() !== req.user.id){
-            return res.status(407).json({ message: 'unauthorized' })
-        }
-
-
-        comment.start = start || comment.start ;
-        comment.description = description || comment.description
-
-        await comment.save()
-
-        res.json(comment)
-    }catch(err){
-        res.status(500).json({ message: err.message});
+        res.status(200).json({ message: "Comment updated successfully", comment: updatedComment });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
-
-}
+};
 
 exports.deleteComment = async (req, res) => {
     try{
-       const comment = await Comment.findById(req.params.id);
+       const comment = await Comment.findByIdAndDelete(req.params.id);
          if(!comment){
             return res.status(404).json({ message: "Comment not found"})
          }
 
-         await comment.remove();
          res.status(200).json({ message: "Comment deleted successfully" });
     }catch(err) {
         res.status(500).json({ message: err.message})

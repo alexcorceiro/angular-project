@@ -42,16 +42,18 @@ exports.getAllComments = async (req, res) => {
 }
 
 exports.getCommentById = async (req, res) => {
-    try{
-        const comment = await Comment.find(req.params.id).populate("user").populate("post")
-        if(!comment){
+    try {
+        // Utilisez findById au lieu de find
+        const comment = await Comment.findById(req.params.id).populate("user").populate("post");
+        if (!comment) {
             return res.status(404).send({message: "Comment not found"});
         }
         res.json(comment);
-    }catch(err){
+    } catch (err) {
         res.status(500).send({message: err.message});
     }
-}
+};
+
 
 exports.updateComment = async (req, res) => {
     try{

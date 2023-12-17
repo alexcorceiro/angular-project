@@ -9,22 +9,20 @@ if (admin.apps.length === 0) {
     });
 }
 
-const bucket = admin.storage().bucket(); 
+const bucket = admin.storage().bucket();
 
 async function uploadImageToFirebase(file, userId, type, postId) {
     const fileName = `${uuidv4()}-${file.originalname}`;
     let filePath;
-    
-    // Correction de la logique conditionnelle pour utiliser '==='
+
     if (type === "profile") {
         filePath = `users/${userId}/profile/${fileName}`;
     } else if (type === "post") {
-        // Assurez-vous que le chemin correspond au format requis
         filePath = `users/${userId}/posts/${postId}/${fileName}`;
     } else {
         throw new Error("Invalid type");
     }
-    
+
     const blob = bucket.file(filePath);
 
     const blobWriter = blob.createWriteStream({
@@ -36,12 +34,20 @@ async function uploadImageToFirebase(file, userId, type, postId) {
     return new Promise((resolve, reject) => {
         blobWriter.on('error', (err) => reject(err));
 
-        blobWriter.on('finish', () => {
-            const publicUrl = `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(blob.name)}`;
-            resolve(publicUrl);
+        blobWriter.on('finish', async () => {
+            try {
+                // Rendre le fichier public
+                await blob.makePublic();
+        
+                // Générer l'URL publique
+                const publicUrl = `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(blob.name)}`;
+                resolve(publicUrl);
+            } catch (err) {
+                reject(err);
+            }
         });
 
-        blobWriter.end(file.buffer); 
+        blobWriter.end(file.buffer);
     });
 }
 

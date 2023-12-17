@@ -16,7 +16,9 @@ exports.createPost = async (req, res) => {
 
      if(req.file){
         
-        imageUrl = await uploadImageToFirebase(req.file, req.user.id, "post", post._id)
+        imageUrl = await uploadImageToFirebase(req.file, req.user.id, post._id, "post")
+        post.image = imageUrl;
+
      }
 
    

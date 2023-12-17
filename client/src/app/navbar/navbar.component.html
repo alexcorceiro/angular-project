@@ -1,0 +1,19 @@
+<nav class="main-nav">
+  <div class="navbar">
+    <div class="user-profile">
+      <img src="assets/twitter.png" alt="logo" class="logo-image" />
+      <a class="nav-title">Twitter-wich</a>
+    </div>
+    <div class="settings-icon">
+      <button class="post-card-btn-option" mat-button [matMenuTriggerFor]="postMenu">
+        <span class="material-symbols-outlined">
+          menu
+        </span>
+      </button>
+      <mat-menu #postMenu="matMenu">
+        <button mat-menu-item><span class="material-symbols-outlined">person</span>Profile</button>
+        <button mat-menu-item><span class="material-symbols-outlined">logout</span>Deconnexion</button>
+      </mat-menu>
+    </div>
+  </div>
+</nav>
